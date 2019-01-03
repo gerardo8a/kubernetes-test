@@ -8,12 +8,17 @@ PODS=$1
 VM=$2
 
 # This is the VM TOTAL size
-VM_CPU=22
-VM_MEMORY=256
+VM_CPU=21
+VM_MEMORY=250
 
 if [ -z $VM ]; then
    echo "Need to pass VM name as second parameter"
    exit 1
+fi
+
+if [ $PODS -gt $VM_CPU ]; then
+   PODS=$VM_CPU
+   echo "Max pods reached ($VM_CPU). Using 1 cpu per pod"
 fi
 
 # Gets the VM number
